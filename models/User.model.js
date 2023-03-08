@@ -1,11 +1,17 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
-const userSchema = new Schema(
+const userSchema = new mongoose.Schema(
   {
+    nombre:{
+      type: String,
+      required: [true, 'El nombre es requerido.'],
+      lowercase: true,
+      trim: true
+    },
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'El Email es requerido.'],
       unique: true,
       lowercase: true,
       trim: true
@@ -13,6 +19,13 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, 'Password is required.']
+    },
+    telefono:{
+      type: Number,
+      required: [true, 'El teléfono es requerido.'],
+      unique: true,
+      trim: true,
+      default: undefined,
     }
   },
   {
@@ -21,6 +34,6 @@ const userSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

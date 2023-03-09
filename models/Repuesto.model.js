@@ -14,7 +14,7 @@ const repuestoSchema = new mongoose.Schema(
             trim: true
         },
         nSerie:{
-            type: Number,
+            type: String,
             require:true,
             trim: true
         },
@@ -22,13 +22,17 @@ const repuestoSchema = new mongoose.Schema(
             type: String,
             trim: true
         },
-        imgRepuesto: String,
-        estado:{
+        descriptionRepuesto:{
             type: String,
-            enum: ["Pendiente", "Aceptada", "Rechazada"],
+            require: true,
+        },
+        imgRepuesto: String,
+        estadoRepuesto:{
+            type: String,
+            enum: ["Pendiente","Aceptada", "Rechazada"],
             default: "Pendiente"
         },
-        valorEstado:{
+        valorEstadoRepuesto:{
             type: Boolean,
             default: false
         },

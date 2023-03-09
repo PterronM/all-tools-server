@@ -7,7 +7,10 @@ module.exports = (app) => {
   app.use((err, req, res, next) => {
     // whenever you call next(err), this middleware will handle the error
     // always logs the error
-    console.error("ERROR", req.method, req.path, err);
+    // console.error("ERROR", req.method, req.path, err);
+    if(err.status===401){
+      return res.status(401).json({errorMessage: "Usuario no registrado"})
+    }
 
     // only render if the error ocurred before sending the response
     if (!res.headersSent) {

@@ -14,17 +14,20 @@ const averiaSchema = new mongoose.Schema(
             trim: true
         },
         nSerie:{
-            type: Number,
+            type: String,
             require:true,
             trim: true
         },
+        descriptionAveria:{
+
+        },
         imgAveria: String,
-        estado:{
+        estadoAveria:{
             type: String,
-            enum: ["Pendiente", "Aceptada", "Rechazada"],
+            enum: ["Pendiente", "Finalizada", "Rechazada"],
             default: "Pendiente"
         },
-        valorEstado:{
+        valorEstadoAveria:{
             type: Boolean,
             default: false
         },

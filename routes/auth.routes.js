@@ -73,7 +73,6 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
-
 //TODO----- POST "api/auth/login" => Validar credenciales del usuario
 router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;

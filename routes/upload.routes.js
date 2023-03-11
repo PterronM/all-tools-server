@@ -9,6 +9,7 @@ router.post("/", uploader.single("image"), (req, res, next) => {
     next("No file uploaded!");
     return;
   }
+  res.json("probando")
 
   // get the URL of the uploaded file and send it as a response.
   // 'imageUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend

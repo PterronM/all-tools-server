@@ -18,10 +18,13 @@ const averiaSchema = new mongoose.Schema(
             require:true,
             trim: true
         },
-        descriptionAveria:{
-
-        },
         imgAveria: String,
+
+        descriptionAveria:{
+            type: String,
+            require: true
+        },
+       
         estadoAveria:{
             type: String,
             enum: ["Pendiente", "Finalizada", "Rechazada"],

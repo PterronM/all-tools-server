@@ -24,7 +24,7 @@ router.get("/:idUser", async (req, res, next) => {
 });
 
 //todo----- PATCH ("/api/user/:idUser") => Recibir y actualizar info por su id
-router.patch("/:idUser", async (req, res, next) => {
+router.patch("/:idUser/update", async (req, res, next) => {
   const { idUser } = req.params;
   const { nombre, email, telefono } = req.body;
 
@@ -41,7 +41,7 @@ router.patch("/:idUser", async (req, res, next) => {
 });
 
 //todo ---- DELETE ("api/user/:idUser") =>
-router.delete("/:idUser", async (req, res, next) => {
+router.delete("/:idUser/delete", async (req, res, next) => {
     const { idUser } = req.params;
   
     try {

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
-const e = require("express");
 const User = require("../models/User.model.js");
 const jwt = require("jsonwebtoken");
 const isAuthenticated = require("../middleware/auth.middleware");
@@ -52,8 +51,6 @@ router.post("/signup", async (req, res, next) => {
     if (foundUserEmail !== null) {
       res.status(400).json({ errorMessage: "Usuario existente" });
       return;
-    } else {
-      res.json("Usuario Correcto");
     }
 
     //Encriptar password
@@ -61,12 +58,13 @@ router.post("/signup", async (req, res, next) => {
     const hastPassword = await bcrypt.hash(password, salt);
 
     //Creacion del Usuario en la BD
-    await User.create({
+    const user = await User.create({
       nombre,
       email,
       password: hastPassword,
       telefono,
     });
+    console.log(user);
     res.status(200).json("Usuario creado correctamente");
   } catch (error) {
     next(error);
@@ -104,7 +102,8 @@ router.post("/login", async (req, res, next) => {
     //PAYLOAD => Contenido del token que identifica al usuario
     const payload = {
       _id: foundUser._id,
-      email: foundUser.email
+      email: foundUser.email,
+      role: foundUser.role
     }
 
     // Generarmos el token
@@ -121,7 +120,7 @@ router.post("/login", async (req, res, next) => {
 
 //TODO---- GET "api/auth/verify" => Verificamos si el usuario esta activo o no
 router.get("/verify", isAuthenticated,(req,res,next)=>{
-  // console.log(req.payload)
+  console.log(req.payload)
   res.status(200).json(req.payload)
 })
 

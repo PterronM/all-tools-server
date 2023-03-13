@@ -111,19 +111,16 @@ router.patch("/:idRepuesto/update", async (req, res, next) => {
 //todo --- PACHT ("api/repuesto/:idRepuesto/updateStatus") => Actualizar estado repuesto
 router.patch("/:idRepuesto/updateStatus", async (req, res, next) => {
   const { idRepuesto } = req.params;
-  const { aceptar, rechazar } = req.body;//sustituir por true o false del frontend
+  const { aceptada, rechazada } = req.body;//sustituir por true o false del frontend
 
   try {
-    if (aceptar) {
-      await Repuesto.findByIdAndUpdate(idRepuesto, {
-        estadoRepuesto: "Aceptada",
-      });
-    } else if (rechazar) {
-      await Repuesto.findByIdAndUpdate(idRepuesto, {
-        estadoRepuesto: "Rechazado",
-      });
+     if(aceptada){
+      await Repuesto.findByIdAndUpdate(idRepuesto,{estadoRepuesto:"Aceptada"});
+      res.json("Estado repuesto actualizado");
+    }else if(rechazada){
+      await Repuesto.findByIdAndUpdate(idRepuesto,{estadoRepuesto:"Rechazada"});
+      res.json("Estado repuesto rechazada");
     }
-    res.json("Estado actualizado");
   } catch (error) {
     next(error);
   }

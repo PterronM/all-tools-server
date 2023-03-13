@@ -111,18 +111,25 @@ router.patch("/:idAveria/update", async (req, res, next) => {
 //todo --- PACHT ("api/averias/:idAveria/updateStatus") => Actualizar estado averia
 router.patch("/:idAveria/updateStatus", async (req, res, next) => {
   const { idAveria } = req.params;
-  const { finalizar, eliminar } = req.body; //sustituir por valor true o false depende de lo que mande el frontend
+  const { finalizar, rechazada } = req.body; //sustituir por valor true o false depende de lo que mande el frontend
   // console.log(finalizar)
   try {
-    if (finalizar) {
-      await Averia.findByIdAndUpdate(idAveria, {
-        estadoAveria: "Finalizada",
-      });
-      res.json("Estado averia actualizado");
-    } else if (eliminar) {
-      await Averia.findByIdAndDelete(idAveria);
-      res.json("Averia eliminada");
+    if(finalizar){
+      await Averia.findByIdAndUpdate(idAveria,{estadoAVeria:"Finalizada"});
+      res.json("Estado averia finalizado");
+    }else if(rechazada){
+      await Averia.findByIdAndUpdate(idAveria,{estadoAveria:"Rechazada"});
+      res.json("Estado averia rechazada");
     }
+    // if (finalizar) {
+    //   await Averia.findByIdAndUpdate(idAveria, {
+    //     estadoAveria: "Finalizada",
+    //   });
+    //   res.json("Estado averia actualizado");
+    // } else if (rechazada) {
+    //   await Averia.findByIdAndDelete(idAveria);
+    //   res.json("Averia eliminada");
+    // }
   } catch (error) {
     next(error);
   }

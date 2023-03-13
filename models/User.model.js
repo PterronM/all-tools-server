@@ -23,9 +23,7 @@ const userSchema = new mongoose.Schema(
     telefono:{
       type: Number,
       required: [true, 'El teléfono es requerido.'],
-      unique: true,
       trim: true,
-      default: undefined,
     },
     role:{
         type: String,

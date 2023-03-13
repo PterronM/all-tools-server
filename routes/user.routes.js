@@ -1,15 +1,22 @@
 const router = require("express").Router();
 const e = require("express");
+const isAuthenticated = require("../middleware/auth.middleware");
 const User = require("../models/User.model");
 
-//todo -----GET ("/api/user") => Muestra todos los usuarios "Tecnicos" de la base de datos
+
+//todo -----GET ("/api/user") => Muestra el tipo de user de la Base de Datos
 router.get("/", async (req, res, next) => {
+  const {idUser} = req.payload
   try {
-    const response = await User.find().select("role");
+    // const response = await User.findById(idUser);
+    const response = await User.findById(idUser)
     console.log(response);
     res.json(response);
-  } catch (error) {}
+  } catch (error) {
+    next(error)
+  }
 });
+
 
 //todo ---- GET ("/api/user/:idUser") => Muestra los detalles de los técnicos por su id
 router.get("/:idUser", async (req, res, next) => {

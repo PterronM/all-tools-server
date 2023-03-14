@@ -47,11 +47,6 @@ router.post("/create-repuesto", async (req, res, next) => {
     return;
   }
 
-  // if (req.file === undefined) {
-  //     res.status(401).json({errorMessage: "Por favor, instroduzca una imagen para su producto"});
-  //     return;
-  //   }
-
   try {
     await Repuesto.create({
       maquina,

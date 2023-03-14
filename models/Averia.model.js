@@ -37,10 +37,6 @@ const averiaSchema = new mongoose.Schema(
         idUser:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        },
-        tecnico:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
         }
     },
     {

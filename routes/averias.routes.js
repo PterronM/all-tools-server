@@ -26,13 +26,12 @@ const {_id} = req.payload
   }
 });
 
-//! IMPLANTAR CLOUDINARY
 //todo --- POST("api/averias/create-averia") => Crear averias en la BD
 router.post("/create-averia", async (req, res, next) => {
 
    
-  const { maquina, modelo, nSerie, descriptionAveria, imgAveria,tecnico } = req.body;
-  console.log(tecnico)
+  const { maquina, modelo, nSerie, descriptionAveria, imgAveria } = req.body;
+
 
   if (!maquina || !modelo || !nSerie || !imgAveria || !descriptionAveria ) {
     res
@@ -40,11 +39,6 @@ router.post("/create-averia", async (req, res, next) => {
       .json({ errorMessage: "Todos los campos deben estar rellenos" });
     return;
   }
-
-  // if (req.file === undefined) {
-  //     res.status(401).json({errorMessage: "Por favor, instroduzca una imagen para su producto"});
-  //     return;
-  //   }
 
   try {
     await Averia.create({
@@ -54,7 +48,38 @@ router.post("/create-averia", async (req, res, next) => {
       imgAveria,
       descriptionAveria,
       idUser: req.payload._id,
-      tecnico
+    });
+
+    res.json("Averia creada correctamente");
+  } catch (error) {
+    next(error);
+    console.log(error);
+  }
+});
+
+//todo --- POST("api/averias/create-averia-adm") => Crear averias en la BD por el adm
+router.post("/create-averia-adm", async (req, res, next) => {
+
+   
+  const { idUser,maquina, modelo, nSerie, descriptionAveria, imgAveria } = req.body;
+  console.log(req.body);
+
+
+  if (!idUser || !maquina || !modelo || !nSerie || !imgAveria || !descriptionAveria ) {
+    res
+      .status(401)
+      .json({ errorMessage: "Todos los campos deben estar rellenos" });
+    return;
+  }
+
+  try {
+    await Averia.create({
+      idUser,
+      maquina,
+      modelo,
+      nSerie,
+      imgAveria,
+      descriptionAveria,
     });
 
     res.json("Averia creada correctamente");

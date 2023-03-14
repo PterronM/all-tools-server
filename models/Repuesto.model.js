@@ -18,6 +18,7 @@ const repuestoSchema = new mongoose.Schema(
             require:true,
             trim: true
         },
+        //crear array para imagenes 
         imgRepuesto: String,
         descriptionRepuesto:{
             type: String,

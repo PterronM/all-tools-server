@@ -31,7 +31,8 @@ const {_id} = req.payload
 router.post("/create-averia", async (req, res, next) => {
 
    
-  const { maquina, modelo, nSerie, descriptionAveria, imgAveria } = req.body;
+  const { maquina, modelo, nSerie, descriptionAveria, imgAveria,tecnico } = req.body;
+  console.log(tecnico)
 
   if (!maquina || !modelo || !nSerie || !imgAveria || !descriptionAveria ) {
     res
@@ -52,7 +53,8 @@ router.post("/create-averia", async (req, res, next) => {
       nSerie,
       imgAveria,
       descriptionAveria,
-      idUser: req.payload._id
+      idUser: req.payload._id,
+      tecnico
     });
 
     res.json("Averia creada correctamente");
@@ -111,25 +113,16 @@ router.patch("/:idAveria/update", async (req, res, next) => {
 //todo --- PACHT ("api/averias/:idAveria/updateStatus") => Actualizar estado averia
 router.patch("/:idAveria/updateStatus", async (req, res, next) => {
   const { idAveria } = req.params;
-  const { finalizar, rechazada } = req.body; //sustituir por valor true o false depende de lo que mande el frontend
-  // console.log(finalizar)
+  const { finalizada, rechazada } = req.body; //sustituir por valor true o false depende de lo que mande el frontend
+  console.log(req.body)
   try {
-    if(finalizar){
-      await Averia.findByIdAndUpdate(idAveria,{estadoAVeria:"Finalizada"});
+    if(finalizada){
+      await Averia.findByIdAndUpdate(idAveria,{estadoAveria:"Finalizada"});
       res.json("Estado averia finalizado");
     }else if(rechazada){
       await Averia.findByIdAndUpdate(idAveria,{estadoAveria:"Rechazada"});
       res.json("Estado averia rechazada");
     }
-    // if (finalizar) {
-    //   await Averia.findByIdAndUpdate(idAveria, {
-    //     estadoAveria: "Finalizada",
-    //   });
-    //   res.json("Estado averia actualizado");
-    // } else if (rechazada) {
-    //   await Averia.findByIdAndDelete(idAveria);
-    //   res.json("Averia eliminada");
-    // }
   } catch (error) {
     next(error);
   }

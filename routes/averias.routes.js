@@ -14,26 +14,27 @@ router.get("/", async (req, res, next) => {
 
 //todo--- GET("api/averiasIdTec") => Muetra las averias de un tecnico por su id
 router.get("/averiasIdTec", async (req, res, next) => {
-
-const {_id} = req.payload
+  const { _id } = req.payload;
 
   try {
-    const response = await Averia.find({idUser:_id})
+    const response = await Averia.find({ idUser: _id });
     // console.log(response)
-    res.json(response)
+    res.json(response);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
 //todo --- POST("api/averias/create-averia") => Crear averias en la BD
 router.post("/create-averia", async (req, res, next) => {
-
-   
   const { maquina, modelo, nSerie, descriptionAveria, imgAveria } = req.body;
 
-
-  if (!maquina || !modelo || !nSerie || !imgAveria || !descriptionAveria ) {
+  if (
+    !maquina 
+    || !modelo 
+    || !nSerie 
+    // || !imgAveria 
+    || !descriptionAveria) {
     res
       .status(401)
       .json({ errorMessage: "Todos los campos deben estar rellenos" });
@@ -59,13 +60,18 @@ router.post("/create-averia", async (req, res, next) => {
 
 //todo --- POST("api/averias/create-averia-adm") => Crear averias en la BD por el adm
 router.post("/create-averia-adm", async (req, res, next) => {
-
-   
-  const { idUser,maquina, modelo, nSerie, descriptionAveria, imgAveria } = req.body;
+  const { idUser, maquina, modelo, nSerie, descriptionAveria, imgAveria } =
+    req.body;
   console.log(req.body);
 
-
-  if (!idUser || !maquina || !modelo || !nSerie || !imgAveria || !descriptionAveria ) {
+  if (
+    !idUser ||
+    !maquina ||
+    !modelo ||
+    !nSerie ||
+    // !imgAveria ||
+    !descriptionAveria
+  ) {
     res
       .status(401)
       .json({ errorMessage: "Todos los campos deben estar rellenos" });
@@ -90,25 +96,23 @@ router.post("/create-averia-adm", async (req, res, next) => {
 });
 
 //todo-- GET("api/averias/:idAveria") => Enviar los datos de una averia por su id
-router.get("/:idAveria", async(req,res,next)=>{
-
-  const {idAveria} = req.params
-  console.log(idAveria)
+router.get("/:idAveria", async (req, res, next) => {
+  const { idAveria } = req.params;
+  console.log(idAveria);
 
   try {
-    const response = await Averia.findById(idAveria)
-    console.log(response)
-    res.json(response)
-    
+    const response = await Averia.findById(idAveria);
+    console.log(response);
+    res.json(response);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 //todo --- PACHT ("api/averias/:idAveria/update") => Actualizar averia por su id
 router.patch("/:idAveria/update", async (req, res, next) => {
   const { idAveria } = req.params;
- 
+
   const {
     maquina,
     modelo,
@@ -139,13 +143,13 @@ router.patch("/:idAveria/update", async (req, res, next) => {
 router.patch("/:idAveria/updateStatus", async (req, res, next) => {
   const { idAveria } = req.params;
   const { finalizada, rechazada } = req.body; //sustituir por valor true o false depende de lo que mande el frontend
-  console.log(req.body)
+  console.log(req.body);
   try {
-    if(finalizada){
-      await Averia.findByIdAndUpdate(idAveria,{estadoAveria:"Finalizada"});
+    if (finalizada) {
+      await Averia.findByIdAndUpdate(idAveria, { estadoAveria: "Finalizada" });
       res.json("Estado averia finalizado");
-    }else if(rechazada){
-      await Averia.findByIdAndUpdate(idAveria,{estadoAveria:"Rechazada"});
+    } else if (rechazada) {
+      await Averia.findByIdAndUpdate(idAveria, { estadoAveria: "Rechazada" });
       res.json("Estado averia rechazada");
     }
   } catch (error) {

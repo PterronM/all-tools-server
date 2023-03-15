@@ -37,7 +37,7 @@ router.post("/create-repuesto", async (req, res, next) => {
     !maquina ||
     !modelo ||
     !nSerie ||
-    !imgRepuesto ||
+    // !imgRepuesto ||
     !descriptionRepuesto ||
     !nSerieRepuesto
   ) {

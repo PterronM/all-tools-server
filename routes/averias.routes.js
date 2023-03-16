@@ -98,11 +98,11 @@ router.post("/create-averia-adm", async (req, res, next) => {
 //todo-- GET("api/averias/:idAveria") => Enviar los datos de una averia por su id
 router.get("/:idAveria", async (req, res, next) => {
   const { idAveria } = req.params;
-  console.log(idAveria);
+  // console.log(idAveria);
 
   try {
     const response = await Averia.findById(idAveria);
-    console.log(response);
+    // console.log(response);
     res.json(response);
   } catch (error) {
     next(error);
@@ -143,7 +143,7 @@ router.patch("/:idAveria/update", async (req, res, next) => {
 router.patch("/:idAveria/updateStatus", async (req, res, next) => {
   const { idAveria } = req.params;
   const { finalizada, rechazada } = req.body; //sustituir por valor true o false depende de lo que mande el frontend
-  console.log(req.body);
+  // console.log(req.body);
   try {
     if (finalizada) {
       await Averia.findByIdAndUpdate(idAveria, { estadoAveria: "Finalizada" });

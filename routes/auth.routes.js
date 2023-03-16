@@ -7,7 +7,7 @@ const isAuthenticated = require("../middleware/auth.middleware");
 
 //TODO----POST "/api/auth/signup" => Registrar al usuario en la BD
 router.post("/signup", async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const { nombre, email, password, telefono } = req.body;
 
@@ -64,7 +64,7 @@ router.post("/signup", async (req, res, next) => {
       password: hastPassword,
       telefono,
     });
-    console.log(user);
+    // console.log(user);
     res.status(200).json("Usuario creado correctamente");
   } catch (error) {
     next(error);
@@ -124,7 +124,7 @@ router.post("/login", async (req, res, next) => {
 
 //TODO---- GET "api/auth/verify" => Verificamos si el usuario esta activo o no
 router.get("/verify", isAuthenticated,(req,res,next)=>{
-  console.log(req.payload)
+  // console.log(req.payload)
   res.status(200).json(req.payload)
 })
 

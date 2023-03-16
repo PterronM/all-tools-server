@@ -16,11 +16,11 @@ const isAuthenticated = expressjwt({
     const token = tokenArr[1]
 
     if (tokenType !== "Bearer") {
-      console.log("Tipo de token no valido")
+      // console.log("Tipo de token no valido")
       return null
     }
 
-    console.log("El token existe y tiene tipo correcto")
+    // console.log("El token existe y tiene tipo correcto")
     return token
     
   }

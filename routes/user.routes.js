@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
 
 //todo ---- GET ("/api/user/:idUser") => Muestra los detalles de los técnicos por su id
 router.get("/:idUser", async (req, res, next) => {
-  console.log(req.params);
+  // console.log(req.params);
   const { idUser } = req.params;
   try {
     const response = await User.findById(idUser);

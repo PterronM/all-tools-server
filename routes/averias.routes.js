@@ -54,7 +54,7 @@ router.post("/create-averia", async (req, res, next) => {
     res.json("Averia creada correctamente");
   } catch (error) {
     next(error);
-    console.log(error);
+    // console.log(error);
   }
 });
 
@@ -62,7 +62,7 @@ router.post("/create-averia", async (req, res, next) => {
 router.post("/create-averia-adm", async (req, res, next) => {
   const { idUser, maquina, modelo, nSerie, descriptionAveria, imgAveria } =
     req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   if (
     !idUser ||
@@ -91,7 +91,7 @@ router.post("/create-averia-adm", async (req, res, next) => {
     res.json("Averia creada correctamente");
   } catch (error) {
     next(error);
-    console.log(error);
+    // console.log(error);
   }
 });
 

@@ -75,15 +75,18 @@ router.post("/signup", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
 
+
   if (!email || !password) {
     res.status(400).json({ errorMessage: "Los campos deben estar rellenos" });
     return;
   }
 
+
+
   try {
     //Confirmar que el usuario esta dado de alta en la BD
     const foundUser = await User.findOne({ email });
-    if (!email) {
+    if (!foundUser) {
       res.status(400).json({ errorMessage: "Credenciales incorrectas" });
       return;
     }
@@ -93,7 +96,8 @@ router.post("/login", async (req, res, next) => {
     const isPasswordCorrect = await bcrypt.compare(
       password,
       foundUser.password
-    );
+      );
+      
     if (!isPasswordCorrect) {
       res.status(400).json({ errorMessage: "Credenciales incorrectas" });
       return;

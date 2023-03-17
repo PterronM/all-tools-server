@@ -25,7 +25,6 @@ router.get("/repuestosIdTec", async(req,res,next)=>{
   }
 })
 
-//! IMPLANTAR CLOUDINARY
 //todo --- POST("api/repuestos/create-repuesto") => Crear repuesto en la BD
 router.post("/create-repuesto", async (req, res, next) => {
   

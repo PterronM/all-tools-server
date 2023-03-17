@@ -64,7 +64,7 @@ router.post("/create-repuesto", async (req, res, next) => {
   }
 });
 
-//todo-- GET("api/repuestos/:idRepuesto") => Envia los datos de una averia por su id
+//todo-- GET("api/repuestos/:idRepuesto") => Envia los datos de una repuesto por su id
 router.get("/:idRepuesto", async(req,res,next)=>{
 
   const {idRepuesto} = req.params

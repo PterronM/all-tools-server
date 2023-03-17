@@ -49,11 +49,14 @@ router.patch("/:idUser/update", async (req, res, next) => {
 //todo ---- DELETE ("api/user/:idUser") =>
 router.delete("/:idUser/delete", async (req, res, next) => {
     const { idUser } = req.params;
+    // console.log(idUser)
   
     try {
       await User.findByIdAndDelete(idUser);
       res.json("Usuario eliminado");
-    } catch (error) {}
+    } catch (error) {
+      next(error)
+    }
   });
 
 module.exports = router;
